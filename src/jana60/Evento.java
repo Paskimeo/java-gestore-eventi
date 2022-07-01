@@ -16,7 +16,7 @@ public class Evento {
 	
 	
 	//costruttori
-	public Evento(String titolo, LocalDate data, int postiTotali, int postiPrenotati)throws Exception,NullPointerException {
+	public Evento(String titolo, LocalDate data, int postiTotali)throws Exception,NullPointerException {
 		super();
 		this.titolo = titolo;
 		this.data = data;
@@ -59,9 +59,7 @@ public class Evento {
 		return postiPrenotati;
 	}
 	
-	public void setPostiPrenotati(int postiPrenotati) {
-		this.postiPrenotati = postiPrenotati;
-	}
+	
 
 	//controlli
 	//controllo data
@@ -101,13 +99,17 @@ public class Evento {
 		}
 		
 		// metordi
-		public int numeroPrenotazioni() {
-			return postiTotali - postiPrenotati;
+		public void numeroPrenotazioni(int prenotazione) {
+			 postiPrenotati = postiPrenotati + prenotazione;
+		}
+		
+		public void numeroDisdette (int disdette) {
+			 postiPrenotati = postiPrenotati + disdette;
 		}
 		
 		
 	
-	  @Override
+	  
 	  public String toString() {
 		  return "in data " + data +" l'evento " + titolo + " è stato creato ";
 	  }
