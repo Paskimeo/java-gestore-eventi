@@ -5,13 +5,14 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args)  {
 		
 		Scanner scan = new Scanner(System.in);
 		String confermaPren;
 		String confermaDis;
 		boolean flag = false;
 		
+	
 	
 		//richiesta dati
 		System.out.println("inserisci il titolo dell'evento: ");
@@ -30,6 +31,9 @@ public class Main {
 		System.out.println("inserisci l'anno: ");
 		int anno = Integer.parseInt(scan.nextLine());
 		
+		
+		
+		try {
 		//salvataggio dati
 		LocalDate data = LocalDate.of(anno, mese, giorno);
 		
@@ -59,10 +63,9 @@ public class Main {
 		
 		
 		
-		}else if(confermaPren.equalsIgnoreCase("no"))
-			System.out.println(evento.toString());
-			flag = true;
-			
+		}
+			if(evento.getPostiPrenotati() > 0) 
+			{
 			do 
 			{
 				
@@ -80,8 +83,14 @@ public class Main {
 				
 				System.out.println("disdetta effettuate " + (evento.getPostiPrenotati() - disdetta) + " Totale posti disponibili " + (evento.numeroPrenotazioni() + disdetta) );
 
+			}else if (confermaPren.equalsIgnoreCase("no"))
+				System.out.println(evento.toString());
+				flag = true;
 			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+				
 	}
 	
-
+	}
 }

@@ -16,7 +16,7 @@ public class Evento {
 	
 	
 	//costruttori
-	public Evento(String titolo, LocalDate data, int postiTotali, int postiPrenotati)throws Exception {
+	public Evento(String titolo, LocalDate data, int postiTotali, int postiPrenotati)throws Exception,NullPointerException {
 		super();
 		this.titolo = titolo;
 		this.data = data;
@@ -68,24 +68,24 @@ public class Evento {
 	public void controlloData() throws Exception
 	{
 		if(oggi.isAfter(data)) {
-			throw new Exception ("Data errata, non puo essere fatta pria della data odierna");
+			throw new NullPointerException ("Data errata, non puo essere fatta pria della data odierna");
 		}
 	}
 	
-	//controllo posti
+	//controllo prenotazioni
 	public void controlloPosti() throws Exception
 	{
-		if(postiTotali<0) {
+		if(postiPrenotati<0) {
 			throw new Exception ("deve esserci almeno 1 persona a presenziare");
 		}
 	}
 	
 	
-	//controllo  prenotazioni
+	//controllo  posti
 	public int prenotazioni() throws Exception
 	{
 		if( postiTotali <= 0) {
-			throw new Exception ("senza prenotazioni non si fa nulla");
+			throw new Exception ("senza posti disponibili non si fa nulla");
 		}
 		return postiPrenotati += 1;
 	}
