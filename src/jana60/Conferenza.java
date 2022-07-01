@@ -6,7 +6,7 @@ public class Conferenza extends Evento {
 	private String argomento;
 	private String oratore;
 
-	public Conferenza(String titolo, LocalDate data, int postiTotali) throws Exception {
+	public Conferenza(String titolo, LocalDate data, int postiTotali,String argomento,String oratore) throws Exception {
 		super(titolo, data, postiTotali);
 		this.argomento = argomento;
 		this.oratore = oratore;
@@ -14,6 +14,7 @@ public class Conferenza extends Evento {
 
 	public String getArgomento() {
 		return argomento;
+		
 	}
 
 	public void setArgomento(String argomento) {
@@ -30,6 +31,6 @@ public class Conferenza extends Evento {
 
 	@Override
 	public String toString() {
-		return super.toString()+ " questa è una conferenza riguardante: " + argomento + " presentata da: " + oratore;
+		return super.toString()+ " questa è una conferenza riguardante: " + argomento + " esposto dalla persona col titolo di:  " + oratore;
 	}
 }
