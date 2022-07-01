@@ -1,5 +1,6 @@
 package jana60;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -19,11 +20,11 @@ public class Main {
 		int anno = 0;
 		
 		
-	
+		
 		//richiesta dati
 		System.out.println("inserisci il titolo dell'evento: ");
 		String titolo = scan.nextLine();
-	try {
+		try {
 		System.out.println("inserisci il numero di posti disponibili: ");
 		 posti = Integer.parseInt(scan.nextLine());
 		
@@ -36,10 +37,15 @@ public class Main {
 		
 		System.out.println("inserisci l'anno: ");
 		 anno = Integer.parseInt(scan.nextLine());
-	}
-		catch (NumberFormatException nfe) {
-			System.out.println("devono essere dei numeri");
-		}
+	
+	} catch (DateTimeException e) {
+		System.out.println("I valori devono essere numeri.");
+	} catch (NumberFormatException ny) {
+		System.out.println("I valori devono essere numeri.");
+	} catch (Exception dwa) {
+		System.out.println(" riscontrato un errore, riprova.");
+		
+	} 
 	
 	//domanda se si sta organizando una conferenza
 			do {
@@ -75,26 +81,30 @@ public class Main {
 					System.out.println(conf.toString() + " il cui nome è "+nome + " e il suo cognome è " + cognome );
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
-				}
+				} 
 			
+				 
+				 
+				 
+				 
 			}else if(confermaConf.equalsIgnoreCase("no")) {
 				flagConf = true;
 			
 		}
 	
-	
-	
+		// fine domanda se  è conferenza
+			
 	
 	
 		
 	    
-		
-		try {
 		//salvataggio dati
+		try {
+		
 		LocalDate data = LocalDate.of(anno, mese, giorno);
 		
 		Evento evento = new Evento(titolo, data, posti);
-	
+		System.out.println(evento.toString());
 		
 		
 		
@@ -120,7 +130,7 @@ public class Main {
 		
 		System.out.println(evento.toString() + "prenotazione effettuate " +  evento.getPostiPrenotati() + " Totale posti disponibili " + (evento.getPostiTotali()- prenotazioni));
 	
-		
+		//ciclo per richiesta disdire
 		int postiRimasti = evento.getPostiTotali()- prenotazioni;
 		do 
 		{
@@ -138,7 +148,12 @@ public class Main {
 			int disdetta = Integer.parseInt(scan.nextLine());
 			evento.numeroDisdette(disdetta);
 			
+			if(disdetta > evento.getPostiPrenotati()) {
+				System.out.println("non puoi disdire, dei posti oltre il tuo numero massimo");
+			}
+			
 			System.out.println(evento.toString() + "disdetta effettuate " +  disdetta + " Totale posti rimasti " + (postiRimasti + disdetta) );
+		
 		
 			
 		}else if (confermaPren.equalsIgnoreCase("no"))
@@ -147,16 +162,19 @@ public class Main {
 		
 		
 		}
-		
+			if(flagConf = true) {
+				
+			}
 	
 		
 		
 		
 		
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} catch (Exception e) 
+		{
+			  System.out.println(e.getMessage());
 			
-	}
+		} 
 		
 	
 	}

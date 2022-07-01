@@ -84,6 +84,8 @@ public class Evento {
 	{
 		if( postiTotali <= 0) {
 			throw new Exception ("senza posti disponibili non si fa nulla");
+		}if (postiTotali == postiPrenotati) {
+			throw new Exception ("non sono consetite ulterirori prenotazioni");
 		}
 		return postiPrenotati += 1;
 	}
@@ -98,7 +100,7 @@ public class Evento {
 			return postiPrenotati -= 1;
 		}
 		
-		// metordi
+		// metodi
 		public void numeroPrenotazioni(int prenotazione) {
 			 postiPrenotati = postiPrenotati + prenotazione;
 		}
