@@ -9,7 +9,7 @@ public class Evento {
 	private String titolo;
 	private LocalDate data;
 	private int postiTotali;
-	private int postiPrenotati = 0;
+	private int postiPrenotati;
 	private LocalDate oggi = LocalDate.now();
 	private DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
@@ -21,7 +21,7 @@ public class Evento {
 		this.titolo = titolo;
 		this.data = data;
 		this.postiTotali = postiTotali;
-		this.postiPrenotati = postiPrenotati;
+		this.postiPrenotati = 0;
 		
 		controlloData();
 		controlloPosti();
@@ -59,6 +59,10 @@ public class Evento {
 		return postiPrenotati;
 	}
 	
+	public void setPostiPrenotati(int postiPrenotati) {
+		this.postiPrenotati = postiPrenotati;
+	}
+
 	//controlli
 	//controllo data
 	public void controlloData() throws Exception
@@ -83,7 +87,7 @@ public class Evento {
 		if( postiTotali <= 0) {
 			throw new Exception ("senza prenotazioni non si fa nulla");
 		}
-		return postiPrenotati +1;
+		return postiPrenotati += 1;
 	}
 	
 	
@@ -93,12 +97,19 @@ public class Evento {
 			if(oggi.isAfter(data) || postiPrenotati <= 0) {
 				throw new Exception ("L'evento è passato o non ci sono piu  posti");
 			}
-			return postiPrenotati -1;
+			return postiPrenotati -= 1;
 		}
+		
+		// metordi
+		public int numeroPrenotazioni() {
+			return postiTotali - postiPrenotati;
+		}
+		
+		
 	
 	  @Override
 	  public String toString() {
-		  return data + titolo;
+		  return "in data " + data +" l'evento " + titolo + " è stato creato ";
 	  }
 	
 	
